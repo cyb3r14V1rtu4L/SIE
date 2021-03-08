@@ -38,14 +38,7 @@
                             <div class="progress-bar" role="progressbar" aria-valuenow="1" aria-valuemin="1" aria-valuemax="4" style="width: 15%;"></div>
                         </div>
                         <ul>
-                            <li>
-                                <a href="#primer_reporte" data-toggle="tab">
-                                    <div class="icon-circle">
-                                        <i class="ti-package"></i>
-                                    </div>
-                                    APERTURA DE CASILLA
-                                </a>
-                            </li>
+
                             <li>
                                 <a href="#segundo_reporte" data-toggle="tab">
                                     <div class="icon-circle">

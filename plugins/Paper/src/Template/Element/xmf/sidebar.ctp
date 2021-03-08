@@ -19,7 +19,7 @@ Tip 2: you can change the color of the active button using the data-active-color
         {
         ?>
             <div class="logo text-center">
-                <img style="max-height:37px;" src="<?php echo $this->request->webroot?>paper/img/partidos/frentexqroo.jpg">
+                <img style="max-height:37px;" src="<?php echo $this->request->webroot?>paper/img/partidos/poramoraplaya.jpg">
             </div>
 
          <?php

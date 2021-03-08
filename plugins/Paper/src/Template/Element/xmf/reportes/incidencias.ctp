@@ -16,11 +16,12 @@
 
               <?php
               $total_incidencias = 0;
+              //pr($CasillasIncidencias);
               foreach($CasillasIncidencias as $c_i)
               {
               ?>
                 <tr>
-                    <td><?=$c_i['CasillaDatos']['name'];?></td>
+                    <td><?=$c_i['CasillaDatos'][0]['name'];?></td>
                     <td><?=$c_i['xmf_total_incidencias'];?></td>
                 </tr>
               <?php

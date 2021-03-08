@@ -1,7 +1,7 @@
 <?php
 foreach($casillas_instalando as $cp){
 ?>
-    <div class="col-lg-2 col-sm-12">
+    <div class="col-lg-3 col-sm-12">
         <div class="card ">
             <div class="content">
                 <div class="row">

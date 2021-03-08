@@ -23,60 +23,18 @@
                                 <th><i class="ti-package"></i> CASILLA</th>
                                 <th><i class="ti-time"></i> INSTALACI&Oacute;N</th>
                                 <th><i class="ti-time"></i> INICIO VOTACI&Oacute;N</th>
-                                <th><i class="ti-user"></i> FUNCIONARIOS ELECTORALES DEL INE</th>
                             </tr>
                         </thead>
                         <tbody>
 
                         <?php foreach ($tabular as $tabata): ?>
-                          <tr>
+                          <tr  align="left">
                             <td><?= h($tabata->name) ?></td>
                             <td><?= h($tabata->instalacion ? $tabata->instalacion->format('h:i A') : '') ?></td>
                             <td><?= h($tabata->inicio ? $tabata->inicio->format('h:i A'):'') ?></td>
-                            <td>
-                                <ul>
-                                    <?php
-                                    for($f=0;$f<=3;$f++)
-                                    {
-                                    ?>
-                                    <li>
-                                        NOMBRE FUNCIONARIO
-                                    </li>
-                                    <?php
-                                    }
-                                    ?>
 
-                            </td>
                           </tr>
                         <?php endforeach; ?>
-<!--
-                            <?php
-                            for($x=0;$x<=4;$x++){
-                            ?>
-                            <tr>
-                                <td>CB206</td>
-                                <td>7:03</td>
-                                <td>7:33</td>
-                                <td>
-                                    <ul>
-                                        <?php
-                                        for($f=0;$f<=3;$f++)
-                                        {
-                                        ?>
-                                        <li>
-                                            NOMBRE FUNCIONARIO
-                                        </li>
-                                        <?php
-                                        }
-                                        ?>
-
-                                </td>
-                            </tr>
-
-
-                            <?php
-                            }
-                            ?> -->
 
                         </tbody>
                     </table>
@@ -85,7 +43,7 @@
             </div>
         </div>
     </div>
-
+	<!-- 
     <div class="row">
         <div class="col-lg-6 col-sm-6">
             <div class="text-center">
@@ -98,5 +56,5 @@
             </div>
         </div>
     </div>
-
+    -->
 </div>   <!-- container-fluid -->

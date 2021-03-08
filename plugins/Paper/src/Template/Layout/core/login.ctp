@@ -13,7 +13,7 @@
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
 
-$cakeDescription = '.:: XMF Cristina ::.';
+$cakeDescription = '.:: SICEL Sistema Integral para el Control Electoral ::.';
 ?>
 <!DOCTYPE html>
 <html lang="en">

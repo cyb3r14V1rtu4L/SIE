@@ -6,10 +6,11 @@
                 <div class="content">
                     <div id="chartHours" class="ct-chart"></div>
                     <div class="footer">
-                        <!-- <div class="chart-legend">
+                        <!--<div class="chart-legend">
                             <i class="fa fa-circle text-warning"></i> VOTANTES
                             <i class="fa fa-circle text-info"></i> PROMOVIDOS
-                        </div> -->
+                        </div>
+                        -->
                         <hr>
                         <div class="stats">
                             <i class="ti-reload"></i> Información Actualizada
@@ -31,7 +32,7 @@
               text: '<h4 class="title">ACUMULADO DE VOTACIONES</h4>'
           },
           credits:{enabled:false},
-          colors:['#F3BB45','#68B3C8','#3398d6','#b4c973','#6c99bb'],
+          colors:['#D84500','#990000','#3398d6','#b4c973','#6c99bb'],
           subtitle: {
               text: '<p class="category">Monitoreo en tiempo real</p>'
           },
@@ -63,7 +64,8 @@
               name: 'Votantes',
               data: <?= $votantes?>
 
-          }, {
+          },
+          {
               name: 'Promovidos',
               data: <?= $promovidos?>
 

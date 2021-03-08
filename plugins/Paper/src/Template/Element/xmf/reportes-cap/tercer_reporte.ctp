@@ -1,5 +1,5 @@
 <?= $this->Form->create('ThirdReport',array('id'=>'ThirdReport'));?>
-<h5 class="info-text">FLUJO DE VOTACIÓN 12:00 - 15:00 HRS</h5>
+<h5 class="info-text">FLUJO DE VOTACIÓN 11:30 - 15:00 HRS</h5>
 <div class="row">
     <div class="col-sm-6 text-center">
             <div class="form-group">

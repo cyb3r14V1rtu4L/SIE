@@ -1,11 +1,11 @@
 <?= $this->Form->create('ForthReport',array('id'=>'ForthReport'));?>
 <h5 class="info-text">CIERRE DE LA CASILLA Y FLUJO DE VOTACIÓN FINAL. </h5>
-<div class="row">
+<div class="row" style="display: none;">
 
         <div class="col-sm-6 ">
             <div class="form-group">
-                <label>HORA DEL CIERRE</label>
-                <input type="text" name="hr_cierre" id="hr_cierre" class="form-control" value="<?= (isset($casillas_cuarto_reporte[0]['hr_cierre']))? $casillas_cuarto_reporte[0]['hr_cierre']:'';?>" >
+               <!-- <label>HORA DEL CIERRE</label>-->
+                <input type="hidden" name="hr_cierre" id="hr_cierre" class="form-control" value="<?= (isset($casillas_cuarto_reporte[0]['hr_cierre']))? $casillas_cuarto_reporte[0]['hr_cierre']:'';?>" >
                 <input type="hidden" name="casilla_id" id="casilla_id" class="form-control" value="<?= (isset($id)) ? $id : $_SESSION['Casilla']['id'];?>">
 
             </div>
@@ -70,8 +70,8 @@
         dataType: "json",
         data: {
             casilla_id:$('#casilla_id').val(),
-            hr_cierre:$('#hr_cierre').val(),
-            habia_gente_fila:$('#habia_gente_fila').is(':checked'),
+            /*hr_cierre:$('#hr_cierre').val(),
+            habia_gente_fila:$('#habia_gente_fila').is(':checked'),*/
             votantes:$('#votantes').val(),
             promovidos:$('#promovidos').val(),
         }

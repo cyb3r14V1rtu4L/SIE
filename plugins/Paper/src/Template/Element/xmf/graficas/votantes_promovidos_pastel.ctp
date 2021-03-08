@@ -8,7 +8,6 @@
         <div class="footer">
             <div class="chart-legend">
                 <i class="fa fa-circle text-warning"></i> VOTANTES
-                <i class="fa fa-circle text-info"></i> PROMOVIDOS
 
             </div>
         </div>

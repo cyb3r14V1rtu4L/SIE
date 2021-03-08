@@ -47,7 +47,7 @@
         </div>
       </div>
     </div>
-
+	<!-- 
     <div class="row">
         <div class="col-lg-6 col-sm-6">
             <div class="text-center">
@@ -60,7 +60,7 @@
             </div>
         </div>
     </div>
-
+    -->
 </div>   <!-- container-fluid -->
 
 <script type="text/javascript">

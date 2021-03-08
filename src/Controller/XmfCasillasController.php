@@ -161,116 +161,152 @@ class XmfCasillasController extends AppController
 
     }
 
-    public function monitorCasillasAbiertas()
-    {
-      $role_id = $_SESSION['Auth']['User']['role_id'];
+    public function formulaMunicipios(){
+        $this->LoadModel('XmfVotes');
 
+        $data = $this->XmfVotes->find('all');
+        $data->select([
+            'name' => 'name',
+            'id'  => 'xmf_casillas_id',
+            'votes'   => $data->newExpr('COALESCE(sum(XmfVotes.votes),0)')
+        ])->join([
+            'box' => [
+                'table' => 'xmf_casillas',
+                'type' => 'INNER',
+                'conditions' => ['box.id = XmfVotes.xmf_casillas_id'],
+            ],
+
+        ])->group(['xmf_casillas_id']);
+        return($data);
+    }
+
+  public function monitorCasillasAbiertas() {
+     $role_id = $_SESSION['Auth']['User']['role_id'];
+     $formulaMunicipios = $this->formulaMunicipios();
      $this->getCounterHead();
      $this->getIncidencias();
+
      $this->LoadModel('XmfViewReporteSegundosTerceros');
      $this->LoadModel('XmfReportsCierre');
      $this->LoadModel('XmfPrimerReporteTab');
      $this->LoadModel('XmfReapers');
+     $this->LoadModel('XmfVotes');
+
+    $conditions = array('XmfCasillas.hora_inicio  IS NOT NULL','XmfCasillas.status'=>'V');
+
+    /*
+    $casillas_representantes = $this->XmfPrimerReporteTab->find('all');
+    $casillas_representantes->hydrate(false);
+    $casillas_representantes =$casillas_representantes->toArray();
+    */
+
+    $fields = ['id','name','rc_telefono','rg_telefono'];
 
 
-        if($role_id == 'e687cb91-4cdf-4ab2-992f-e76584199c2e')
-     {
-       $conditions = array('XmfCasillas.hora_inicio  IS NOT NULL','XmfCasillas.status'=>'V','XmfCasillas.rg_id'=>$_SESSION['Auth']['User']['id']);
-     }else{
-         $conditions = array('XmfCasillas.hora_inicio  IS NOT NULL','XmfCasillas.status'=>'V');
-     }
-
-     $casillas_representantes = $this->XmfPrimerReporteTab->find('all');
-     $casillas_representantes->hydrate(false);
-     $casillas_representantes =$casillas_representantes->toArray();
-
-
-
-
-     $fields = ['id','name','rc_telefono','rg_telefono'];
-
-     $casillas_segundo_reporte = $this->XmfCasillas->find('all', array('fields'=>$fields,'conditions' => $conditions));
-     $casillas_segundo_reporte->hydrate(false);
-     $casillas_segundo_reporte =$casillas_segundo_reporte->toArray();
-
-     $casillas_tercer_reporte = $this->XmfCasillas->find('all', array('fields'=>$fields,'conditions' => $conditions));
-     $casillas_tercer_reporte->hydrate(false);
-     $casillas_tercer_reporte =$casillas_tercer_reporte->toArray();
+    //PRIMER REPORTE
+    array_push($conditions,['XmfCasillas.reporte'=>1]);
+    $casillas_segundo_reporte = $this->XmfCasillas->find('all', array('fields'=>$fields,'conditions' => $conditions));
+    $casillas_segundo_reporte->isHydrationEnabled(false);
+    $casillas_segundo_reporte =$casillas_segundo_reporte->toArray();
+    
+    
+    //SEGUNDO REPORTE
+    $conditions[1]['XmfCasillas.reporte'] = 2;
+    $casillas_tercer_reporte = $this->XmfCasillas->find('all', array('fields'=>$fields,'conditions' => $conditions));
+    $casillas_tercer_reporte->isHydrationEnabled(false);
+    $casillas_tercer_reporte =$casillas_tercer_reporte->toArray();
 
 
-     $casillas_cuarto_reporte = $this->XmfReportsCierre->find('all');
-     $casillas_cuarto_reporte->hydrate(false)->join([
-        'table' => 'xmf_casillas',
-        'alias' => 'c',
-        'type' => 'INNER',
-        'conditions' => 'c.id = XmfReportsCierre.xmf_casillas_id',
-    ])->where(['c.rg_id'=>$_SESSION['Auth']['User']['id']]);
-     $casillas_cuarto_reporte =$casillas_cuarto_reporte->toArray();
+    //TERCER REPORTE <--
+    $casillas_cuarto_reporte = $this->XmfReportsCierre->find('all');
+    $casillas_cuarto_reporte->hydrate(false)->join([
+    'table' => 'xmf_casillas',
+    'alias' => 'c',
+    'type' => 'INNER',
+    'conditions' => 'c.id = XmfReportsCierre.xmf_casillas_id',
+    ])->where(['c.reporte'=>3]);
+    $casillas_cuarto_reporte =$casillas_cuarto_reporte->toArray();
 
-     foreach($casillas_segundo_reporte as $k=>$cp)
-     {
-       $casilla_votos = $this->XmfViewReporteSegundosTerceros->find('all',['conditions'=>['XmfViewReporteSegundosTerceros.xmf_casillas_id' => $cp['id'] ]]);
-       $casilla_votos->select([
+    foreach($casillas_segundo_reporte as $k=>$cp)
+    {
+        $casilla_votos = $this->XmfViewReporteSegundosTerceros->find('all',['conditions'=>['XmfViewReporteSegundosTerceros.xmf_casillas_id' => $cp['id'] ]]);
+        $casilla_votos->select([
          'name'                => 'name',
          'votantes_segundo'    => $casilla_votos->func()->sum('votantes_segundo'),
          'promovidos_segundo'  => $casilla_votos->func()->sum('promovidos_segundo'),
-       ])
-       ->group(['xmf_casillas_id','name']);
+        ])
+        ->group(['xmf_casillas_id','name']);
 
-       $casilla_votos->hydrate(false);
-       $casilla_votos =$casilla_votos->toArray();
-       $casillas_segundo_reporte[$k]['votos'] = ($casilla_votos) ? $casilla_votos[0]: 0;
-     }
+        $casilla_votos->hydrate(false);
+        $casilla_votos =$casilla_votos->toArray();
+        $casillas_segundo_reporte[$k]['votos'] = ($casilla_votos) ? $casilla_votos[0]: 0;
+    }
 
 
-     foreach($casillas_tercer_reporte as $k=>$cp)
-     {
-       $casilla_votos = $this->XmfViewReporteSegundosTerceros->find('all',['conditions'=>['XmfViewReporteSegundosTerceros.xmf_casillas_id' => $cp['id'] ]]);
-       $casilla_votos->select([
+    foreach($casillas_tercer_reporte as $k=>$cp)
+    {
+        $casilla_votos = $this->XmfViewReporteSegundosTerceros->find('all',['conditions'=>['XmfViewReporteSegundosTerceros.xmf_casillas_id' => $cp['id'] ]]);
+        $casilla_votos->select([
          'name'                => 'name',
          'votantes_tercero'    => $casilla_votos->func()->sum('votantes_tercero'),
          'promovidos_tercero'  => $casilla_votos->func()->sum('promovidos_tercero'),
-       ])
-       ->group(['xmf_casillas_id','name']);
+        ])
+        ->group(['xmf_casillas_id','name']);
 
-       $casilla_votos->hydrate(false);
-       $casilla_votos =$casilla_votos->toArray();
-       $casillas_tercer_reporte[$k]['votos'] = ($casilla_votos) ? $casilla_votos[0]: 0;
-     }
-
-     foreach($casillas_cuarto_reporte as $k=>$cp)
-     {
-       $casilla_datos = $this->XmfCasillas->find('all',['fields'=>$fields,'conditions'=>['XmfCasillas.id' => $cp['xmf_casillas_id'] ]]);
-       $casilla_datos->hydrate(false);
-       $casilla_datos =$casilla_datos->toArray();
-       $casillas_cuarto_reporte[$k]['CasillaDatos'] = $casilla_datos[0];
-     }
-
-     $this->paginate = array(
-                             'limit'=>35,
-                             'page' => 1,
-                             'order' => array('XmfCasillas.name' => 'asc')
-                            );
-     $this->LoadModel('XmfCasillas');
+        $casilla_votos->hydrate(false);
+        $casilla_votos =$casilla_votos->toArray();
+        $casillas_tercer_reporte[$k]['votos'] = ($casilla_votos) ? $casilla_votos[0]: 0;
+    }
 
 
-     $role_id = $_SESSION['Auth']['User']['role_id'];
-     if($role_id == 'e687cb91-4cdf-4ab2-992f-e76584199c2e')
-     {
-        $conditions =  array('XmfCasillas.hora_cierre'=>'IS NOT NULL','XmfCasillas.status'=>'X','XmfCasillas.rg_id'=>$_SESSION['Auth']['User']['id']);
-     }else{
-        $conditions =  array('XmfCasillas.hora_cierre'=> 'IS NOT NULL','XmfCasillas.status'=>'X');
-     }
-     #pr($conditions);
-     $casillas_cerradas = $this->XmfCasillas->find('all', array('fields'=>$fields,'conditions' => $conditions));
-     $casillas_cerradas->hydrate(false);
-     $casillas_cerradas =$casillas_cerradas->toArray();
+    foreach($casillas_cuarto_reporte as $k=>$cp)
+    {
+        $casilla_datos = $this->XmfCasillas->find('all', ['fields'=>$fields,'conditions' => ['XmfCasillas.id' => $cp['xmf_casillas_id']]]);
+        $casilla_datos->hydrate(false);
+        $casilla_datos =$casilla_datos->toArray();
+        $casillas_cuarto_reporte[$k]['CasillaDatos'] = $casilla_datos[0];
+    }
 
+    //RESULTADOS FINALES
+    $usuario_roll = $_SESSION['Auth']['User']['id'];
+    $casillas_finales_reporte = $this->XmfReportsCierre->find('all');
+    $casillas_finales_reporte->hydrate(false)->join([
+        'table' => 'xmf_votes',
+        'alias' => 'v',
+        'type' => 'INNER',
+        'conditions' => 'v.xmf_casillas_id = XmfReportsCierre.xmf_casillas_id',
+    ])->group('v.xmf_casillas_id')/*->where(['c.rg_id'=>$_SESSION['Auth']['User']['id']])*/;
+    $casillas_finales_reporte =$casillas_finales_reporte->toArray();
+
+    foreach($casillas_finales_reporte as $k=>$cp){
+        $casilla_datos = $this->XmfCasillas->find('all',['fields'=>$fields,'conditions'=>['XmfCasillas.id' => $cp['xmf_casillas_id'] ]]);
+        $casilla_datos->hydrate(false);
+        $casilla_datos =$casilla_datos->toArray();
+        $casillas_finales_reporte[$k]['CasillaDatos'] = $casilla_datos[0];
+    }
 
 
 
-     $this->set(compact('casillas_representantes','casillas_segundo_reporte','casillas_tercer_reporte','casillas_cuarto_reporte','casillas_cerradas'));
-   }
+    $this->paginate = array(
+                         'limit'=>35,
+                         'page' => 1,
+                         'order' => array('XmfCasillas.nam$casillas_finales_reportee' => 'asc')
+                        );
+    $this->LoadModel('XmfCasillas');
+
+
+
+    $conditions =  array('XmfCasillas.hora_cierre'=> 'IS NOT NULL','XmfCasillas.status'=>'X');
+    #pr($conditions);
+    $casillas_cerradas = $this->XmfCasillas->find('all', array('fields'=>$fields,'conditions' => $conditions));
+    $casillas_cerradas->hydrate(false);
+    $casillas_cerradas =$casillas_cerradas->toArray();
+    
+     $this->set(compact('casillas_representantes','usuario_roll',
+         'casillas_segundo_reporte','casillas_tercer_reporte',
+         'casillas_cuarto_reporte','casillas_cerradas',
+         'casillas_finales_reporte','formulaMunicipios'));
+  }
 
   public function capturaResultados($id=null,$tab)
   {
@@ -359,7 +395,6 @@ class XmfCasillasController extends AppController
       * INI RESULTADOS FINALES
       */
 
-
       $data_resFinalesP = $this->getResultadosFinales('Presidente',$id);
       $data_resFinalesS = $this->getResultadosFinales('Senador',$id);
       $data_resFinalesD = $this->getResultadosFinales('Diputado',$id);
@@ -396,6 +431,49 @@ class XmfCasillasController extends AppController
       }
     }
   }
+  
+  public function enviarEstatus() {
+      if($this->request->is('ajax')) {
+          $this->LoadModel('XmfCasillas');
+          $this->LoadModel('Users');
+          
+          $status = $_POST['status'];
+          $xmf_casillas_id = $_POST['xmf_casillas_id'];
+          
+          switch ($status) {
+              case 'P':
+                  $status  = 'P';
+                  $message = 'Presencia Asignada';
+                  break;
+                  
+              case 'I':
+                  $status  = 'I';
+                  $message = 'Hora de Instlación de Casillla Asignada';
+                  break;
+                  
+              case 'V':
+                  $status  = 'V';
+                  $message = 'Hora de Inicio de Votación Asignada';
+                  break;
+               
+          }
+              
+          $field = 'hora_'.$_POST['typo'];
+          
+          $result = $this->XmfCasillas->updateAll(
+              ["$field" => date("H:i:s"), "status"=>$status],
+              ['id' => $xmf_casillas_id]
+              );
+         
+          $json = array('message'=>$message,'status'=>$status, 'result'=>$result);
+         
+          $this->set([
+              'response' => $json,
+              '_serialize' => 'response',
+          ]);
+          $this->RequestHandler->renderAs($this, 'json');
+      }
+  }
 
   public function getResultadosFinales($tipo,$xmf_casillas_id)
   {
@@ -418,7 +496,7 @@ class XmfCasillasController extends AppController
           'data'   => $data_partidos->newExpr('COALESCE(sum(XmfReapers.votes),0)')
       ])->group(['formula']);
       $data_partidos->hydrate(false);
-      $data_partidos = array_chunk($data_partidos->toArray(),3);
+      $data_partidos = array_chunk($data_partidos->toArray(),4);
 
       $conditions = [
           'XmfReapers.formula is not null',
@@ -461,7 +539,18 @@ class XmfCasillasController extends AppController
       {
           unset($data_votos[$x]);
       }
+
+
+
+     //
+
+      foreach ($data_votos as $k=>$dv){
+          if($dv['id'] != 34 && $dv['id'] != 33){
+              unset($data_votos[$k]);
+          }
+      }
       $data_votos = array_chunk($data_votos,2);
+
       $data_resFinales = array('partidos'=>$data_partidos,'coaliciones'=>$data_coaliciones,'noreg_nulos'=>$data_votos);
       return $data_resFinales;
   }
@@ -569,9 +658,45 @@ class XmfCasillasController extends AppController
     $this->LoadModel('XmfCasillas');
     $casillas_instalando = $this->paginate($this->XmfCasillas->find('all', array('fields'=>$fields,'conditions' => array('XmfCasillas.hora_instalacion  IS NOT NULL','XmfCasillas.status'=>'I',$conditions))));
     $casillas_instalando =$casillas_instalando->toArray();
+
     $this->getIncidencias();
     $this->set(compact('casillas_instalando'));
   }
+
+    public function monitorAbiertas($page=1)
+    {
+        $this->getCounterHead();
+        /*
+        +----------+--------------------------------------+
+        | name     | id                                   |
+        +----------+--------------------------------------+
+        | Admin    | 5197c80d-2d30-4225-a757-b31592c9e0f0 |
+        | Captura  | 80687266-6761-43a2-bd98-f42349a9bb63 |
+        | Monitor* | e687cb91-4cdf-4ab2-992f-e76584199c2e |
+        +----------+--------------------------------------+
+        */
+        $role_id = $_SESSION['Auth']['User']['role_id'];
+        if($role_id == 'e687cb91-4cdf-4ab2-992f-e76584199c2e')
+        {
+            $conditions = array('rg_id'=>$_SESSION['Auth']['User']['id']);
+        }else{
+            $conditions = null;
+        }
+        $this->paginate = array('limit'=>35,
+            'page' => $page,
+            'order' => array('XmfCasillas.name' => 'asc')
+        );
+
+        $fields = ['id','name','rc_telefono','rg_telefono'];
+
+        $this->LoadModel('XmfCasillas');
+        $casillas_abiertas = $this->paginate($this->XmfCasillas->find('all', array('fields'=>$fields,'conditions' => array('XmfCasillas.hora_inicio  IS NOT NULL','XmfCasillas.status'=>'V',$conditions))));
+        $casillas_abiertas = $casillas_abiertas->toArray();
+        $count_abiertas = count($casillas_abiertas);
+        $this->getIncidencias();
+        $this->set(compact('casillas_abiertas'));
+        $this->set(compact('count_abiertas'));
+    }
 
 
   public function monitorCerradas($page=1)

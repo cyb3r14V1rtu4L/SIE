@@ -1,7 +1,7 @@
 <?php
 foreach($casillas_presentes as $cp){
 ?>
-    <div class="col-lg-2 col-sm-12">
+    <div class="col-lg-3 col-sm-12">
         <div class="card ">
             <div class="content">
                 <div class="row">
@@ -27,7 +27,7 @@ foreach($casillas_presentes as $cp){
                             #$promovidos =$cp['votos']['promovidos_segundo']+$cp['votos']['promovidos_tercero'];
 
                             ?>
-                            <!--<a href="#" rel="tooltip" style="white-space: nowrap;" title="<?=$votantes?>/<?=$promovidos?>"><span class="pie"><?=$votantes?>/<?=$promovidos?></span></a> -->
+                            <!--<a href="#" rel="tooltip" style="white-space: nowrap;" title="<?=$votantes?>"><span class="pie"><?=$votantes?></span></a> -->
 
                         </div>
                 </div>

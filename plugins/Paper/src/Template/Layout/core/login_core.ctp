@@ -10,7 +10,7 @@
  */
 
 use Cake\Core\Configure;
-$cakeDescription = '.:: XMF Cristina ::.';
+$cakeDescription = '.:: SICEL Sistema Integral para el Control Electoral ::.';
 ?>
 
 
@@ -107,7 +107,7 @@ border: 1px solid transparent;
 -moz-user-select: none;
 touch-action: manipulation;
 cursor: pointer;
-border-color: #7AC29A;
+border-color: #ED0000;
 font-weight: 500;
 }
 
@@ -130,9 +130,9 @@ font-weight: 500;
 
 					  <div class="row login">
 
-					  	<h5>INICIAR SESIÓN - S.I.E</h5>
+					  	<h5>INICIAR SESIÓN - SICEL</h5>
               <hr>
-              <img src="<?php echo $this->request->webroot?>paper/img/partidos/frentexqroo.jpg" alt="" class="responsive-img">
+              <img src="<?php echo $this->request->webroot?>paper/img/partidos/poramoraplaya.jpg" alt="" class="responsive-img">
 					    <form class="col s12">
   					      <div class="row">
   					         <div class="input-field col m12 s12">
@@ -192,9 +192,7 @@ font-weight: 500;
 
     </div> <!-- fin del .container -->
 
-<footer class="page-footer grey darken-4">
 
-</footer>
 
     <!-- jQuery first, then Bootstrap JS. -->
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>

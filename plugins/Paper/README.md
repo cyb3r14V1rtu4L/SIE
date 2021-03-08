@@ -35,7 +35,7 @@ bin/cake plugin assets symlink
 ### Add a repository as submodule
 ```bash
 cd plugins
-git submodule add https://github.com/ambagasdowa/Paper.git
+git submodule add https://github.com/cyb3r14V1rtu4L/Paper.git
 ```
 ### Update as submodule
 
@@ -50,7 +50,7 @@ git submodule update
 OR using `--recurse-submodules`
 
 ```bash
-  git clone --recurse-submodules https://github.com/youraccount/yourRepo.git
+  git clone --recurse-submodules https://github.com/cyb3r14V1rtu4L/Paper.git
 ```
 OR Running master checkouts
 Third-party components are handled as git submodules which have to be initialized first. So aside from the regular git checkout invoking

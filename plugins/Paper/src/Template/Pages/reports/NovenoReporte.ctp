@@ -491,7 +491,7 @@
 
                                     </div>
                                     <div class="tab-pane" id="segundo_reporte">
-                                        <h5 class="info-text">FLUJO DE VOTACIÓN 8:00 - 12:00 HRS</h5>
+                                        <h5 class="info-text">FLUJO DE VOTACIÓN 9:00 - 12:00 HRS</h5>
                                         <div class="row">
 
                                                 <div class="col-sm-6 text-center">

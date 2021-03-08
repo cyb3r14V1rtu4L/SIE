@@ -26,7 +26,7 @@ switch ($method)
     <li class="<?=$active_2;?>">
         <a href="<?php echo $this->Url->build('/XmfReportsSegundoTercero/PrimerReporte'); ?>">
             <i class="ti-bar-chart"></i>
-            <p>PRIMER REPORTE</p>
+                <p>APERTURA DE CASILLAS</p>
         </a>
     </li>
 
@@ -37,24 +37,24 @@ switch ($method)
         $this->Url->build('/XmfReportsSegundoTercero/SegundoReporte');
         ?>">
             <i class="ti-bar-chart"></i>
-            <p>SEGUNDO REPORTE</p>
+            <p>PRIMER REPORTE</p>
         </a>
     </li>
 
     <li class="<?=$active_4;?>">
         <a href="<?php echo $this->Url->build('/XmfReportsSegundoTercero/TercerReporte');?>">
             <i class="ti-bar-chart"></i>
-            <p>TERCER REPORTE</p>
+            <p>SEGUNDO REPORTE</p>
         </a>
     <li class="<?=$active_5;?>">
         <a href="<?php echo $this->Url->build('/XmfReportsSegundoTercero/CuartoReporte');?>">
             <i class="ti-bar-chart"></i>
-            <p>CUARTO REPORTE</p>
+            <p>TERCER REPORTE</p>
         </a>
     </li>
 
     <li class="<?=$active_6;?>">
-        <a href="<?php echo $this->Url->build('/XmfViewReporteSegundosTerceros/lastReport'); ?>">
+        <a href="<?php echo $this->Url->build('/XmfViewReporteSegundosTerceros/lastReport/ayuntamiento'); ?>">
             <i class="ti-user"></i>
             <p>RESULTADOS FINALES</p>
         </a>

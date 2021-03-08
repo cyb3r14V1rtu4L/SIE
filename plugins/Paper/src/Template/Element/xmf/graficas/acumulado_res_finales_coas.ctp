@@ -42,7 +42,7 @@
                                 </div>
                             </div>
                             <div class="col-xs-4">
-                                <span class="text-success"><h5><b><?= $tlvalue['data']?></b></h5></span>
+                                <span class="text-danger"><h5><b><?= $tlvalue['data']?></b></h5></span>
                             </div>
                             <div class="col-xs-5">
                                 <span class="text-info"><small><?= $tlvalue['name']?></small></span>
@@ -71,7 +71,7 @@
               text: 'CONCENTRADO TOTAL COALICIONES'
           },
           credits:{enabled:false},
-          colors:['#F3BB45','#68B3C8','#3398d6','#b4c973','#6c99bb'],
+          colors:['#D84500','#990000','#3398d6','#b4c973','#6c99bb'],
           subtitle: {
               text: 'Monitoreo en tiempo real'
           },

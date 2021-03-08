@@ -42,11 +42,11 @@
                                                     </a>
                                                     &nbsp;
                                                     <?php
-                                                    #$votantes = $cp['votos']['votantes_segundo']+$cp['votos']['votantes_tercero'];
-                                                    #$promovidos =$cp['votos']['promovidos_segundo']+$cp['votos']['promovidos_tercero'];
+                                                    $votantes = $cp['votos']['votantes_segundo']+$cp['votos']['votantes_tercero'];
+                                                    $promovidos =$cp['votos']['promovidos_segundo']+$cp['votos']['promovidos_tercero'];
 
                                                     ?>
-                                                    <!--<a href="#" rel="tooltip" style="white-space: nowrap;" title="<?=$votantes?>/<?=$promovidos?>"><span class="pie"><?=$votantes?>/<?=$promovidos?></span></a> -->
+                                                    <a href="#" rel="tooltip" style="white-space: nowrap;" title="<?=$votantes?>"><span class="pie"><?=$votantes?>/<?=$promovidos?></span></a>
 
                                                 </div>
                                         </div>
@@ -93,11 +93,11 @@
                                                         </a>
                                                         &nbsp;
                                                         <?php
-                                                        #$votantes = $cp['votos']['votantes_segundo']+$cp['votos']['votantes_tercero'];
-                                                        #$promovidos =$cp['votos']['promovidos_segundo']+$cp['votos']['promovidos_tercero'];
+                                                        $votantes = $cp['votos']['votantes_segundo']+$cp['votos']['votantes_tercero'];
+                                                        $promovidos =$cp['votos']['promovidos_segundo']+$cp['votos']['promovidos_tercero'];
 
                                                         ?>
-                                                        <!--<a href="#" rel="tooltip" style="white-space: nowrap;" title="<?=$votantes?>/<?=$promovidos?>"><span class="pie"><?=$votantes?>/<?=$promovidos?></span></a> -->
+                                                        <a href="#" rel="tooltip" style="white-space: nowrap;" title="<?=$votantes?>"><span class="pie"><?=$votantes?>/<?=$promovidos?></span></a>
 
                                                     </div>
                                             </div>
@@ -148,11 +148,11 @@
                                                             <span class="ti-package"></span>
                                                         </a>
                                                         <?php
-                                                        #$votantes = $cp['votos']['votantes_segundo']+$cp['votos']['votantes_tercero'];
-                                                        #$promovidos =$cp['votos']['promovidos_segundo']+$cp['votos']['promovidos_tercero'];
+                                                        $votantes = $cp['votos']['votantes_segundo']+$cp['votos']['votantes_tercero'];
+                                                        $promovidos =$cp['votos']['promovidos_segundo']+$cp['votos']['promovidos_tercero'];
 
                                                         ?>
-                                                        <!--<a href="#" rel="tooltip" style="white-space: nowrap;" title="<?=$votantes?>/<?=$promovidos?>"><span class="pie"><?=$votantes?>/<?=$promovidos?></span></a> -->
+                                                        <a href="#" rel="tooltip" style="white-space: nowrap;" title="<?=$votantes?>"><span class="pie"><?=$votantes?>/<?=$promovidos?></span></a>
 
                                                     </div>
                                             </div>
@@ -194,11 +194,11 @@
 
                                                         &nbsp;
                                                         <?php
-                                                        #$votantes = $cp['votos']['votantes_segundo']+$cp['votos']['votantes_tercero'];
-                                                        #$promovidos =$cp['votos']['promovidos_segundo']+$cp['votos']['promovidos_tercero'];
+                                                        $votantes = $cp['votos']['votantes_segundo']+$cp['votos']['votantes_tercero'];
+                                                        $promovidos =$cp['votos']['promovidos_segundo']+$cp['votos']['promovidos_tercero'];
 
                                                         ?>
-                                                        <!--<a href="#" rel="tooltip" style="white-space: nowrap;" title="<?=$votantes?>/<?=$promovidos?>"><span class="pie"><?=$votantes?>/<?=$promovidos?></span></a> -->
+                                                        <a href="#" rel="tooltip" style="white-space: nowrap;" title="<?=$votantes?>"><span class="pie"><?=$votantes?></span></a>
 
                                                     </div>
                                             </div>
@@ -215,17 +215,19 @@
                 </div>
             </div>
         </div>
+        <!-- 
         <div class="row">
-        <div class="col-lg-6 col-sm-6">
-            <div class="text-center">
-                <button type="submit" class="btn btn-info btn-fill btn-wd">Exportar PDF</button>
+            <div class="col-lg-6 col-sm-6">
+                <div class="text-center">
+                    <button type="submit" class="btn btn-info btn-fill btn-wd">Exportar PDF</button>
+                </div>
+            </div>
+            <div class="col-lg-6 col-sm-6">
+                <div class="text-center">
+                    <button type="submit" class="btn btn-info btn-fill btn-wd">Exportar XLS</button>
+                </div>
             </div>
         </div>
-        <div class="col-lg-6 col-sm-6">
-            <div class="text-center">
-                <button type="submit" class="btn btn-info btn-fill btn-wd">Exportar XLS</button>
-            </div>
-        </div>
-    </div>
+        -->
     </div>
 </div>

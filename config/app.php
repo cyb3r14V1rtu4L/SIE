@@ -62,7 +62,7 @@ return [
      *   You should treat it as extremely sensitive data.
      */
     'Security' => [
-        'salt' => '6e64bea3c835f47ebdb2c5c9b477ccb3da0fa966dea62c83eaab5b3c7f62f4f6',
+        'salt' => '3f20be1491ae333157e20e6c5dbbeb04d8a3824782c7e530b38024492cf11e91',
     ],
 
     /**
@@ -215,9 +215,9 @@ return [
              * the following line and set the port accordingly
              */
             //'port' => 'nonstandard_port_number',
-            'username' => 'root',
-            'password' => 'm0rph1n3',
-            'database' => 'xmf_casillas',
+            'username' => 'morena',
+            'password' => '@m0r3n4#',
+            'database' => 'morena_casillas',
             'encoding' => 'utf8',
             'timezone' => 'UTC',
             'cacheMetadata' => true,

@@ -65,7 +65,7 @@
                             </div>
                             <div class="col-xs-9">
                                 <div class="numbers ">
-                                    <p>INSTALADANDO</p>
+                                    <p>INSTALANDO</p>
                                     <?=$count_instalando?>
                                 </div>
                             </div>
@@ -103,7 +103,7 @@
         </div>
         <div class="col-lg-6 col-sm-12">
             <div class="card">
-                <a href="<?php echo $this->Url->build('/XmfCasillas/MonitorCasillasAbiertas'); ?>">
+                <a href="<?php echo $this->Url->build('/XmfCasillas/MonitorAbiertas'); ?>">
                     <div class="content">
                         <div class="row">
                             <div class="col-xs-3">
@@ -138,6 +138,29 @@
                                 <div class="numbers">
                                     <p>CERRADAS</p>
                                     <?=$count_cerradas;?>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="footer">
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <div class="col-lg-6 col-sm-12">
+            <div class="card">
+                <a href="<?php echo $this->Url->build('/XmfCasillas/MonitorCasillasAbiertas'); ?>">
+                    <div class="content">
+                        <div class="row">
+                            <div class="col-xs-3">
+                                <div class="icon-big icon-warning text-center">
+                                    <i class="ti-package"></i>
+                                </div>
+                            </div>
+                            <div class="col-xs-9">
+                                <div class="numbers ">
+                                    <p>REPORTES</p>
                                 </div>
                             </div>
                         </div>

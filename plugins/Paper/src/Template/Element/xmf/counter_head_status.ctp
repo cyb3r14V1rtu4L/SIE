@@ -62,7 +62,7 @@
                             </div>
                             <div class="col-xs-9">
                                 <div class="numbers ">
-                                    <p>INSTALADANDO</p>
+                                    <p>INSTALANDO</p>
                                     <?=$count_instalando?>
                                 </div>
                             </div>

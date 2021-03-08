@@ -5,18 +5,18 @@ $promovidos_data = (isset($promovidos_s12)) ? $promovidos_s12:$promovidos_s;
 ?>
 <div class="card">
         <div class="header">
-            <h4 class="title">GR&Aacute;FICA VOTANTES Y PROMOVIDOS</h4>
-            <p class="category">VOTACIONES 8:00HRS A 12:OOHRS</p>
+            <h4 class="title">GR&Aacute;FICA VOTANTES</h4>
+            <p class="category">VOTACIONES 8:00HRS A 11:3OHRS</p>
         </div>
         <div class="content">
             <div id="chart8-12" class="ct-chart ct-perfect-fourth"></div>
 
             <div class="footer">
-                <!-- <div class="chart-legend">
+                 <div class="chart-legend">
                     <i class="fa fa-circle text-warning"></i> VOTANTES
                     <i class="fa fa-circle text-info"></i> PROMOVIDOS
 
-                </div> -->
+                </div>
                 <hr>
                 <div class="stats">
                     <i class="ti-timer"></i> Información Actualizada
@@ -40,7 +40,7 @@ $promovidos_data = (isset($promovidos_s12)) ? $promovidos_s12:$promovidos_s;
             text: 'Flujo de Votaciones'
           },
           credits:{enabled:false},
-          colors:['#F3BB45','#68B3C8','#3398d6','#b4c973','#6c99bb'],
+          colors:['#D84500','#990000','#3398d6','#b4c973','#6c99bb'],
           subtitle: {
             text: 'Monitoreo de votos'
           },

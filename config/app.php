@@ -215,8 +215,8 @@ return [
              * the following line and set the port accordingly
              */
             //'port' => 'nonstandard_port_number',
-            'username' => 'morena',
-            'password' => '@m0r3n4#',
+            'username' => 'root',
+            'password' => 'm0rph1n3',
             'database' => 'morena_casillas',
             'encoding' => 'utf8',
             'timezone' => 'UTC',
